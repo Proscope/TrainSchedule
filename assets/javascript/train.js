@@ -37,6 +37,29 @@
 
   	$("#train-name-input").val("");
   	$("#destination-input").val("");
-  	$("#first-train-time-input-input").val("");
+  	$("#first-train-time-input").val("");
   	$("#frequency-input").val("");
+  });
+
+  database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+  	console.log(childSnapshot.val());
+
+  	var trnName = childSnapshot.val().name;
+  	var trnDestination = childSnapshot.val().destination;
+  	var trnFirstTime = childSnapshot.val().first;
+  	var trnFrequency = childSnapshot.val().frequency;
+
+  	console.log(trnName);
+  	console.log(trnDestination);
+  	console.log(trnFirstTime);
+  	console.log(trnFrequency);
+
+  	var trnArrival = "";
+
+
+  	var trnAway = "";
+
+
+  	$("#train-table > tbody").append("<tr><td>" + trnName + "</td><td>" + trnDestination + "</td><td>" +
+  trnFrequency + "</td><td>" + trnArrival + "</td><td>" + trnAway + "</td></tr>");
   });
