@@ -16,14 +16,15 @@
 
   	var trnName = $("#train-name-input").val().trim();
   	var trnDestination = $("#destination-input").val().trim();
-  	var trnFirstTime = moment($("#first-train-time-input").val().trim(), "HH:mm").format("X");
+  	var trnFirstTime = moment($("#first-train-time-input").val().trim(), "HH:mm").subtract(1, "years").format("X");
   	var trnFrequency = $("#frequency-input").val().trim();
 
   	var newTrain = {
   		name: trnName,
   		destination: trnDestination,
   		first: trnFirstTime,
-  		frequency: trnFrequency
+  		frequency: trnFrequency,
+      timeAdded: firebase.database.ServerValue.TIMESTAMP
   	};
 
   	database.ref().push(newTrain);
@@ -54,12 +55,35 @@
   	console.log(trnFirstTime);
   	console.log(trnFrequency);
 
-  	var trnArrival = "";
+    var diffTime = moment().diff(moment.unix(trnFirstTime), "minutes");
+    var tRemain = moment().diff(moment.unix(trnFirstTime), "minutes") % trnFrequency;
+    var minutes = trnFrequency - tRemain;
+    var nextArrival = moment().add(minutes, "m").format("hh:mm A");
+
+   //  var frequency = parseInt(frequency);
+
+  	// var firstTime = moment(trnFirstTime, "HH:mm").subtract(1, "years");
+   //  console.log(firstTime);
+
+   //  var presentTime = moment();
+   //  console.log("Current Time: " + moment(presentTime).format("HH:mm"));
+
+   //  var differenceInTime = moment().diff(moment(firstTime), "minutes");
+   //  console.log("Time Difference: " + differenceInTime);
+
+   //  var timeRemainder = differenceInTime % trnFrequency;
+   //  console.log(timeRemainder);
+
+   //  var minutesForTrain = trnFrequency - timeRemainder;
+   //  console.log("Minutes for the next train: " + minutesForTrain);
+
+   //  var trnAway = moment().add(minutesForTrain, "minutes");
+   //  console.log("Next Train Arrives: " + moment(trnAway).format("HH:mm"));
 
 
-  	var trnAway = "";
+  	// var trnArrival = moment(trnAway).format("HH:mm");
 
 
   	$("#train-table > tbody").append("<tr><td>" + trnName + "</td><td>" + trnDestination + "</td><td>" +
-  trnFrequency + "</td><td>" + trnArrival + "</td><td>" + trnAway + "</td></tr>");
+  trnFrequency + "</td><td>" + nextArrival + "</td><td>" + minutes + "</td></tr>");
   });
