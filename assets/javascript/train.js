@@ -60,28 +60,7 @@
     var minutes = trnFrequency - tRemain;
     var nextArrival = moment().add(minutes, "m").format("hh:mm A");
 
-   //  var frequency = parseInt(frequency);
-
-  	// var firstTime = moment(trnFirstTime, "HH:mm").subtract(1, "years");
-   //  console.log(firstTime);
-
-   //  var presentTime = moment();
-   //  console.log("Current Time: " + moment(presentTime).format("HH:mm"));
-
-   //  var differenceInTime = moment().diff(moment(firstTime), "minutes");
-   //  console.log("Time Difference: " + differenceInTime);
-
-   //  var timeRemainder = differenceInTime % trnFrequency;
-   //  console.log(timeRemainder);
-
-   //  var minutesForTrain = trnFrequency - timeRemainder;
-   //  console.log("Minutes for the next train: " + minutesForTrain);
-
-   //  var trnAway = moment().add(minutesForTrain, "minutes");
-   //  console.log("Next Train Arrives: " + moment(trnAway).format("HH:mm"));
-
-
-  	// var trnArrival = moment(trnAway).format("HH:mm");
+   
 
 
   	$("#train-table > tbody").append("<tr><td>" + trnName + "</td><td>" + trnDestination + "</td><td>" +
